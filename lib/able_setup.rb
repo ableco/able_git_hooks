@@ -1,5 +1,5 @@
 require "able_setup/version"
+require "able_setup/railtie"
 
 module AbleSetup
-  # Your code goes here...
 end
