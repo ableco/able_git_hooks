@@ -4,13 +4,12 @@ module AbleSetup
       desc "Create setup files"
       source_root File.expand_path("../templates", __FILE__)
 
-      def create_project_setup_file
+      def create_setup_executable
         copy_file "setup", "bin/setup"
       end
 
-      def create_rubocop_files
-        copy_file "rubocop.yml", "config/rubocop.yml"
-        copy_file ".rubocop",    ".rubocop"
+      def create_rubocop_file
+        copy_file "rubocop.yml", ".rubocop.yml"
       end
     end
   end
