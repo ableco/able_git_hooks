@@ -21,7 +21,9 @@ Or install it yourself as:
 
 ## Usage
 
-$ bundle exec rails generate able_setup:install
+Execute the generator command to copy the files:
+
+    $ bundle exec rails generate able_setup:install
 
 ## Development
 
