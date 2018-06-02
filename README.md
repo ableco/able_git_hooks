@@ -1,8 +1,7 @@
 # AbleSetup
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/able_setup`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+AbleSetup copies a setup script and rubocop rules to a Rails project.
+It also injects the rubocop command into the precommit hook.
 
 ## Installation
 
@@ -22,7 +21,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+$ bundle exec rails generate able_setup:install
 
 ## Development
 
