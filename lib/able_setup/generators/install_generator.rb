@@ -11,6 +11,12 @@ module AbleSetup
       def create_rubocop_file
         copy_file "rubocop.yml", ".rubocop.yml"
       end
+
+      def append_rubocop_precommit
+        append_to_file ".git/hooks/precommit" do
+          "\nrubocop"
+        end
+      end
     end
   end
 end

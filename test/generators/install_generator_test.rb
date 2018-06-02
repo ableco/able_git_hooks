@@ -11,8 +11,11 @@ class InstallGeneratorTest < Rails::Generators::TestCase
   setup       :prepare_destination
 
   def prepare_destination
-    FileUtils.rm_r("#{ DESTINATION }/bin") if Dir.exist?("#{ DESTINATION }/bin")
+    FileUtils.rm_r("#{ DESTINATION }/bin")  if Dir.exist?("#{ DESTINATION }/bin")
+    FileUtils.rm_r("#{ DESTINATION }/.git") if Dir.exist?("#{ DESTINATION }/.git")
     FileUtils.mkdir_p("#{ DESTINATION }/bin")
+    FileUtils.mkdir_p("#{ DESTINATION }/.git/hooks")
+    FileUtils.touch("#{ DESTINATION }/.git/hooks/precommit")
   end
 
   def test_create_setup_file
@@ -28,6 +31,14 @@ class InstallGeneratorTest < Rails::Generators::TestCase
 
     assert_file ".rubocop.yml" do |f|
       assert_match(/AllCops/, f)
+    end
+  end
+
+  def test_rubocop_appended_to_precommit_hook
+    run_generator
+
+    assert_file ".git/hooks/precommit" do |f|
+      assert_match(/rubocop/, f)
     end
   end
 end
