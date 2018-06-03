@@ -18,24 +18,16 @@ class InstallGeneratorTest < Rails::Generators::TestCase
     FileUtils.touch("#{ DESTINATION }/.git/hooks/precommit")
   end
 
-  def test_create_setup_file
+  def test_create_setup_files
     run_generator
 
     assert_file "bin/setup" do |f|
       assert_match(/bundle install/, f)
     end
-  end
-
-  def test_create_rubocopy_file
-    run_generator
 
     assert_file ".rubocop.yml" do |f|
       assert_match(/AllCops/, f)
     end
-  end
-
-  def test_rubocop_appended_to_precommit_hook
-    run_generator
 
     assert_file ".git/hooks/precommit" do |f|
       assert_match(/bundle exec rubocop/, f)
