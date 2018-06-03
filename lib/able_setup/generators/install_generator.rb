@@ -14,7 +14,15 @@ module AbleSetup
 
       def append_rubocop_precommit
         append_to_file ".git/hooks/precommit" do
-          "\nrubocop"
+          <<~HOOK
+            cmd="bundle exec rubocop "
+            for file in $(git diff --name-only | tr '\n' ' '); do
+              cmd+="<(git show :$file) "
+            done
+
+            # Use echo $cmd to see the cmd generated
+            eval $cmd
+          HOOK
         end
       end
     end

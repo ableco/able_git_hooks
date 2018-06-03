@@ -38,7 +38,7 @@ class InstallGeneratorTest < Rails::Generators::TestCase
     run_generator
 
     assert_file ".git/hooks/precommit" do |f|
-      assert_match(/rubocop/, f)
+      assert_match(/bundle exec rubocop/, f)
     end
   end
 end
