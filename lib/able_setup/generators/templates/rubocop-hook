@@ -1,0 +1,9 @@
+#/usr/bin/bash
+
+cmd="bundle exec rubocop "
+for file in $(git diff --name-only | tr '\n' ' '); do
+  cmd+="<(git show :$file) "
+done
+
+# Use echo $cmd to see the cmd generated
+eval $cmd

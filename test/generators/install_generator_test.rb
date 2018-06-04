@@ -11,26 +11,45 @@ class InstallGeneratorTest < Rails::Generators::TestCase
   setup       :prepare_destination
 
   def prepare_destination
-    FileUtils.rm_r("#{ DESTINATION }/bin")  if Dir.exist?("#{ DESTINATION }/bin")
-    FileUtils.rm_r("#{ DESTINATION }/.git") if Dir.exist?("#{ DESTINATION }/.git")
+    FileUtils.rm_r("#{ DESTINATION }/bin")   if Dir.exist?("#{ DESTINATION }/bin")
+    FileUtils.rm_r("#{ DESTINATION }/.git")  if Dir.exist?("#{ DESTINATION }/.git")
+    FileUtils.rm_r("#{ DESTINATION }/hooks") if Dir.exist?("#{ DESTINATION }/hooks")
+
     FileUtils.mkdir_p("#{ DESTINATION }/bin")
+    FileUtils.mkdir_p("#{ DESTINATION }/hooks/pre-commit")
     FileUtils.mkdir_p("#{ DESTINATION }/.git/hooks")
-    FileUtils.touch("#{ DESTINATION }/.git/hooks/precommit")
   end
 
-  def test_create_setup_files
+  def test_create_bin_files
     run_generator
 
     assert_file "bin/setup" do |f|
       assert_match(/bundle install/, f)
     end
 
+    assert_file "bin/git-hook" do |f|
+      assert_match(/env ruby/, f)
+    end
+  end
+
+  def test_create_rubocop_file
+    run_generator
+
     assert_file ".rubocop.yml" do |f|
       assert_match(/AllCops/, f)
     end
 
-    assert_file ".git/hooks/precommit" do |f|
+    assert_file "hooks/pre-commit/rubocop" do |f|
       assert_match(/bundle exec rubocop/, f)
+    end
+  end
+
+
+  def test_create_pre_commit_script
+    run_generator
+
+    assert_file ".git/hooks/pre-commit" do |f|
+      assert_match(/pre-commit/, f)
     end
   end
 end
