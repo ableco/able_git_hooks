@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    able_setup (0.1.0)
+    able_scripts (0.1.0)
       railties (~> 5.2, >= 5.2.0)
 
 GEM
@@ -63,7 +63,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  able_setup!
+  able_scripts!
   bundler (~> 1.16)
   minitest (~> 5.0)
   rake (~> 10.0)
