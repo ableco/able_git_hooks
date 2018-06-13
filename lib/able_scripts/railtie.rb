@@ -1,9 +1,9 @@
 require "rails"
 
-module AbleSetup
+module AbleScripts
   class Railtie < ::Rails::Railtie
     generators do
-      require "able_setup/generators/install_generator"
+      require "able_scripts/generators/install_generator"
     end
   end
 end

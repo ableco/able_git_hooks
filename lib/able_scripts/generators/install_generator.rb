@@ -1,7 +1,7 @@
-module AbleSetup
+module AbleScripts
   module Generators
     class InstallGenerator < Rails::Generators::Base
-      desc "Create setup files"
+      desc "Generate scripts and config files"
       source_root File.expand_path("../templates", __FILE__)
 
       def copy_bin_files
@@ -15,7 +15,7 @@ module AbleSetup
       end
 
       def install_git_hooks
-        AbleSetup::GIT_HOOKS.each do |hook|
+        AbleScripts::GIT_HOOKS.each do |hook|
           create_file ".git/hooks/#{hook}" do
             <<~HOOK
               #!/bin/sh

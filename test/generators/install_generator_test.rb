@@ -1,28 +1,28 @@
 require "test_helper"
 require "rails/generators/test_case"
-require "able_setup/generators/install_generator"
+require "able_scripts/generators/install_generator"
 
 class InstallGeneratorTest < Rails::Generators::TestCase
   DESTINATION = File.expand_path File.join(File.dirname(__FILE__), "..", "..", "tmp")
+
   FileUtils.mkdir_p(DESTINATION) unless Dir.exist?(DESTINATION)
 
   destination DESTINATION
-  tests       AbleSetup::Generators::InstallGenerator
-  setup       :prepare_destination
+  tests       AbleScripts::Generators::InstallGenerator
 
-  def prepare_destination
-    FileUtils.rm_r("#{ DESTINATION }/bin")   if Dir.exist?("#{ DESTINATION }/bin")
-    FileUtils.rm_r("#{ DESTINATION }/.git")  if Dir.exist?("#{ DESTINATION }/.git")
-    FileUtils.rm_r("#{ DESTINATION }/hooks") if Dir.exist?("#{ DESTINATION }/hooks")
+  def setup
+    FileUtils.rm_r("#{DESTINATION}/bin")   if Dir.exist?("#{DESTINATION}/bin")
+    FileUtils.rm_r("#{DESTINATION}/.git")  if Dir.exist?("#{DESTINATION}/.git")
+    FileUtils.rm_r("#{DESTINATION}/hooks") if Dir.exist?("#{DESTINATION}/hooks")
 
-    FileUtils.mkdir_p("#{ DESTINATION }/bin")
-    FileUtils.mkdir_p("#{ DESTINATION }/hooks/pre-commit")
-    FileUtils.mkdir_p("#{ DESTINATION }/.git/hooks")
+    FileUtils.mkdir_p("#{DESTINATION}/bin")
+    FileUtils.mkdir_p("#{DESTINATION}/hooks/pre-commit")
+    FileUtils.mkdir_p("#{DESTINATION}/.git/hooks")
+
+    run_generator
   end
 
-  def test_create_bin_files
-    run_generator
-
+  def test_bin_files_were_created
     assert_file "bin/setup" do |f|
       assert_match(/bundle install/, f)
     end
@@ -32,9 +32,7 @@ class InstallGeneratorTest < Rails::Generators::TestCase
     end
   end
 
-  def test_create_rubocop_file
-    run_generator
-
+  def test_rubocop_files_were_created
     assert_file ".rubocop.yml" do |f|
       assert_match(/AllCops/, f)
     end
@@ -45,9 +43,7 @@ class InstallGeneratorTest < Rails::Generators::TestCase
   end
 
 
-  def test_create_pre_commit_script
-    run_generator
-
+  def test_pre_commit_script_was_created
     assert_file ".git/hooks/pre-commit" do |f|
       assert_match(/pre-commit/, f)
     end

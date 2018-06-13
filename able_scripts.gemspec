@@ -1,15 +1,15 @@
-
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "able_setup/version"
+
+require "able_scripts/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "able_setup"
-  spec.version       = AbleSetup::VERSION
+  spec.name          = "able_scripts"
+  spec.version       = AbleScripts::VERSION
   spec.authors       = ["Gustavo Beathyate"]
   spec.email         = ["gustavo.bt@me.com"]
 
-  spec.summary       = "Create base setup files for Able projects"
+  spec.summary       = "Create base scripts and config files for Able projects"
   spec.description   = "Adds a setup script and a set of rubocop rules to a project"
   spec.homepage      = "http://able.co"
   spec.license       = "MIT"
