@@ -13,6 +13,6 @@ declare -r hookdir="hooks/$ARG0"
 [ -d "$hookdir" ] || exit 0
 
 for hook in "$hookdir"/*; do
-  echo "executing hook: ${hook} $ARG0"
+  echo "executing hook: ${hook}"
   exec "${hook}"
 done

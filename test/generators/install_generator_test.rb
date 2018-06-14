@@ -3,6 +3,8 @@ require "rails/generators/test_case"
 require "able_scripts/generators/install_generator"
 
 class InstallGeneratorTest < Rails::Generators::TestCase
+  include FileUtils
+
   DESTINATION = File.expand_path File.join(File.dirname(__FILE__), "..", "..", "tmp")
 
   FileUtils.mkdir_p(DESTINATION) unless Dir.exist?(DESTINATION)
@@ -11,14 +13,7 @@ class InstallGeneratorTest < Rails::Generators::TestCase
   tests       AbleScripts::Generators::InstallGenerator
 
   def setup
-    FileUtils.rm_r("#{DESTINATION}/bin")   if Dir.exist?("#{DESTINATION}/bin")
-    FileUtils.rm_r("#{DESTINATION}/.git")  if Dir.exist?("#{DESTINATION}/.git")
-    FileUtils.rm_r("#{DESTINATION}/hooks") if Dir.exist?("#{DESTINATION}/hooks")
-
-    FileUtils.mkdir_p("#{DESTINATION}/bin")
-    FileUtils.mkdir_p("#{DESTINATION}/hooks/pre-commit")
-    FileUtils.mkdir_p("#{DESTINATION}/.git/hooks")
-
+    remake_dirs "bin", ".git", "hooks"
     run_generator
   end
 
@@ -41,6 +36,17 @@ class InstallGeneratorTest < Rails::Generators::TestCase
   def test_git_hook_was_copied
     assert_file ".git/hooks/_do_hook" do |f|
       assert_match(/for hook in/, f)
+    end
+  end
+
+  private
+
+  def remake_dirs(*dirs)
+    dirs.each do |dir|
+      path = "#{DESTINATION}/#{dir}"
+
+      rm_r    path if Dir.exist?(path)
+      mkdir_p path
     end
   end
 end
