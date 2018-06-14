@@ -1,5 +1,0 @@
-#!/usr/bin/env ruby
-
-Dir["hooks/#{ARGV[1]}/*"].each do |path|
-  `sh #{path}` unless File.directory?(path)
-end

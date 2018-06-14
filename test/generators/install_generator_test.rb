@@ -22,17 +22,13 @@ class InstallGeneratorTest < Rails::Generators::TestCase
     run_generator
   end
 
-  def test_bin_files_were_created
+  def test_setup_script_was_copied
     assert_file "bin/setup" do |f|
       assert_match(/bundle install/, f)
     end
-
-    assert_file "bin/git-hook" do |f|
-      assert_match(/env ruby/, f)
-    end
   end
 
-  def test_rubocop_files_were_created
+  def test_rubocop_files_were_copiead
     assert_file ".rubocop.yml" do |f|
       assert_match(/AllCops/, f)
     end
