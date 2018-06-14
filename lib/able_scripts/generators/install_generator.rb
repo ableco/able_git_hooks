@@ -15,7 +15,6 @@ module AbleScripts
 
       def install_git_hooks
         copy_file "git/hooks/_do_hook", ".git/hooks/_do_hook"
-        chmod     ".git/hooks/_do_hook", 0755, verbose: false
 
         AbleScripts::GIT_HOOKS.each do |hook|
           create_link ".git/hooks/#{hook}", "_do_hook"
