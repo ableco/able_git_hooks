@@ -1,7 +1,10 @@
 # Able Scripts
 
 AbleScripts copies a setup script and rubocop rules to a Rails project.
-It also creates pre-commit hook.
+It also installs git hooks so that the scripts can be managed outside of the `.git/hooks` folder.
+All scripts in the `hooks/<hook_name>` folders will be run and expected to return 0.
+For example this gem installs a rubocop hook in `hooks/pre-commit/rubocop` that prevents commits
+that do not pass rubocop check.
 
 ## Installation
 
