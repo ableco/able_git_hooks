@@ -18,7 +18,7 @@ module AbleScripts
         chmod     ".git/hooks/_do_hook", 0755, verbose: false
 
         AbleScripts::GIT_HOOKS.each do |hook|
-          create_link ".git/hooks/_do_hook", ".git/hooks/#{hook}"
+          create_link ".git/hooks/#{hook}", "_do_hook"
         end
       end
     end
