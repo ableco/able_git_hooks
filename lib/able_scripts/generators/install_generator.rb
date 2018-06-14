@@ -7,6 +7,8 @@ module AbleScripts
       def copy_bin_files
         copy_file "setup",    "bin/setup"
         copy_file "git-hook", "bin/git-hook"
+      def copy_setup_script
+        copy_file "bin/setup"
       end
 
       def copy_rubocop_files
@@ -15,13 +17,11 @@ module AbleScripts
       end
 
       def install_git_hooks
+        copy_file "git/hooks/_do_hook", ".git/hooks/_do_hook"
+        chmod     ".git/hooks/_do_hook", 0755, verbose: false
+
         AbleScripts::GIT_HOOKS.each do |hook|
-          create_file ".git/hooks/#{hook}" do
-            <<~HOOK
-              #!/bin/sh
-              ruby bin/git-hook #{hook}
-            HOOK
-          end
+          create_link ".git/hooks/_do_hook", ".git/hooks/#{hook}"
         end
       end
     end

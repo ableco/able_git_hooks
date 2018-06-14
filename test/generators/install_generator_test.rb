@@ -42,10 +42,9 @@ class InstallGeneratorTest < Rails::Generators::TestCase
     end
   end
 
-
-  def test_pre_commit_script_was_created
-    assert_file ".git/hooks/pre-commit" do |f|
-      assert_match(/pre-commit/, f)
+  def test_git_hook_was_copied
+    assert_file ".git/hooks/_do_hook" do |f|
+      assert_match(/for hook in/, f)
     end
   end
 end

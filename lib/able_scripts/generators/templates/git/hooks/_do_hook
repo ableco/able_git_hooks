@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+ARG0=$(basename "${0}")
+
+if [ "${ARG0}" = "_do_hook" ]; then
+  echo "Do not call this script directly."
+  exit 1
+fi
+
+declare -r hookdir="hooks/$ARG0"
+
+[ -d "$hookdir" ] || exit 0
+
+for hook in "$hookdir"/*; do
+  echo "executing hook: ${hook} $ARG0"
+  exec "${hook}"
+done
