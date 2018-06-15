@@ -6,8 +6,8 @@ require "able_git_hooks/version"
 Gem::Specification.new do |spec|
   spec.name          = "able_git_hooks"
   spec.version       = AbleGitHooks::VERSION
-  spec.authors       = ["Gustavo Beathyate"]
-  spec.email         = ["gustavo.bt@me.com"]
+  spec.authors       = ["Mario Rodas", "Gustavo Beathyate"]
+  spec.email         = ["mario@able.co", "gustavo.bt@able.co"]
 
   spec.summary       = "Creates an extensible git hooks system on rails projects"
   spec.description   = "Adds scripts in .git/hooks to call scripts in the root hooks directory"
