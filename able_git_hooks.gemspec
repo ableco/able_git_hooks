@@ -1,16 +1,16 @@
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
-require "able_scripts/version"
+require "able_git_hooks/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "able_scripts"
-  spec.version       = AbleScripts::VERSION
+  spec.name          = "able_git_hooks"
+  spec.version       = AbleGitHooks::VERSION
   spec.authors       = ["Gustavo Beathyate"]
   spec.email         = ["gustavo.bt@me.com"]
 
-  spec.summary       = "Create base scripts and config files for Able projects"
-  spec.description   = "Adds a setup script and a set of rubocop rules to a project"
+  spec.summary       = "Creates an extensible git hooks system on rails projects"
+  spec.description   = "Adds scripts in .git/hooks to call scripts in the root hooks directory"
   spec.homepage      = "http://able.co"
   spec.license       = "MIT"
 

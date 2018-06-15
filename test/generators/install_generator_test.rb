@@ -1,6 +1,6 @@
 require "test_helper"
 require "rails/generators/test_case"
-require "able_scripts/generators/install_generator"
+require "able_git_hooks/generators/install_generator"
 
 class InstallGeneratorTest < Rails::Generators::TestCase
   include FileUtils
@@ -10,17 +10,11 @@ class InstallGeneratorTest < Rails::Generators::TestCase
   FileUtils.mkdir_p(DESTINATION) unless Dir.exist?(DESTINATION)
 
   destination DESTINATION
-  tests       AbleScripts::Generators::InstallGenerator
+  tests       AbleGitHooks::Generators::InstallGenerator
 
   def setup
-    remake_dirs "bin", ".git", "hooks"
+    remake_dirs ".git", "hooks"
     run_generator
-  end
-
-  def test_setup_script_was_copied
-    assert_file "bin/setup" do |f|
-      assert_match(/bundle install/, f)
-    end
   end
 
   def test_rubocop_files_were_copiead

@@ -1,8 +1,8 @@
-require "able_scripts/version"
-require "able_scripts/railtie"
+require "able_git_hooks/version"
+require "able_git_hooks/railtie"
 
-module AbleScripts
-  GIT_HOOKS = %w(
+module AbleGitHooks
+  SCRIPTS = %w(
     applypatch-msg
     pre-applypatch
     post-applypatch

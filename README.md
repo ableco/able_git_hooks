@@ -1,8 +1,9 @@
-# Able Scripts
+# Able Git Hooks
 
-AbleScripts copies a setup script and rubocop rules to a Rails project.
-It also installs git hooks so that the scripts can be managed outside of the `.git/hooks` folder.
+AbleGitHooks installs git hooks so that the scripts can be managed outside of the `.git/hooks` folder.
+
 All scripts in the `hooks/<hook_name>` folders will be run and expected to return 0.
+
 For example this gem installs a rubocop hook in `hooks/pre-commit/rubocop` that prevents commits
 that do not pass rubocop check.
 
@@ -11,7 +12,7 @@ that do not pass rubocop check.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'able_scripts'
+gem 'able_git_hooks'
 ```
 
 And then execute:
@@ -22,4 +23,4 @@ And then execute:
 
 Execute the generator command to copy the files:
 
-    $ bundle exec rails generate able_scripts:install
+    $ bundle exec rails generate able_git_hooks:install
