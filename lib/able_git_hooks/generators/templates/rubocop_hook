@@ -3,5 +3,5 @@
 set -Eeuo pipefail
 
 git diff --cached --name-only --diff-filter=ACM | while read -r file; do
-  bundle exec rubocop -RP -c config/rubocop.yml --stdin "$file" < <(git show :"$file")
+  bundle exec rubocop -RP -c config/rubocop.yml --force-exclusion --stdin "$file" < <(git show :"$file")
 done
