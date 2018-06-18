@@ -10,7 +10,7 @@ module AbleGitHooks
 
         AbleGitHooks::SCRIPTS.each do |hook|
           create_link ".git/hooks/#{hook}", "_do_hook"
-          chmod       "0755",               ".git/hooks/#{hook}"
+          chmod       ".git/hooks/#{hook}", 0755
         end
       end
 
