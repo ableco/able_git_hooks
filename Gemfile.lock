@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    able_git_hooks (0.5.1)
+    able_git_hooks (0.6.0)
       railties (~> 5.2, >= 5.2.0)
 
 GEM
@@ -37,7 +37,7 @@ GEM
     method_source (0.9.0)
     mini_portile2 (2.3.0)
     minitest (5.11.3)
-    nokogiri (1.8.2)
+    nokogiri (1.8.3)
       mini_portile2 (~> 2.3.0)
     rack (2.0.5)
     rack-test (1.0.0)
