@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    able_git_hooks (0.6.0)
+    able_git_hooks (0.7.0)
       railties (~> 5.2, >= 5.2.0)
 
 GEM
