@@ -13,15 +13,11 @@ class InstallGeneratorTest < Rails::Generators::TestCase
   tests       AbleGitHooks::Generators::InstallGenerator
 
   def setup
-    remake_dirs ".git", "hooks"
+    remake_dirs ".git", "hooks", "config"
     run_generator
   end
 
-  def test_rubocop_files_were_copiead
-    assert_file ".rubocop.yml" do |f|
-      assert_match(/AllCops/, f)
-    end
-
+  def test_rubocop_hooks_were_copied
     assert_file "hooks/pre-commit/rubocop" do |f|
       assert_match(/bundle exec rubocop/, f)
     end
@@ -30,6 +26,12 @@ class InstallGeneratorTest < Rails::Generators::TestCase
   def test_git_hook_was_copied
     assert_file ".git/hooks/_do_hook" do |f|
       assert_match(/for hook in/, f)
+    end
+  end
+
+  def test_rubocop_config_was_copied
+    assert_file "config/rubocop.yml" do |f|
+      assert_match(/AllCops/, f)
     end
   end
 
