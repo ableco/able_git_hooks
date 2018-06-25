@@ -15,8 +15,8 @@ module AbleGitHooks
       end
 
       def install_rubocop_hooks
-        copy_file "rubocop_hook", "hooks/pre-commit/rubocop"
-        chmod "hooks/pre-commit/rubocop", 0755
+        copy_file "rubocop.rb", "hooks/pre-commit/rubocop.rb"
+        chmod "hooks/pre-commit/rubocop.rb", 0755
       end
 
       def copy_rubocop_defaults

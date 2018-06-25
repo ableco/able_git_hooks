@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    able_git_hooks (0.9.1)
+    able_git_hooks (0.10.0)
       railties (~> 5.2, >= 5.2.0)
       rubocop (~> 0.57.2, >= 0.57.2)
 
