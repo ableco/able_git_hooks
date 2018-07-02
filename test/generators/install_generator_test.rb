@@ -35,6 +35,22 @@ class InstallGeneratorTest < Rails::Generators::TestCase
     end
   end
 
+  def test_eslint_hook_were_copied
+    assert_file "hooks/pre-commit/eslint-check.js"
+  end
+
+  def test_eslint_config_was_copied
+    assert_file ".eslintrc.json"
+  end
+
+  def test_stylelint_hook_not_copied
+    assert_no_file "hooks/pre-commit/stylelint-check.js"
+  end
+
+  def test_stylelint_config_not_copied
+    assert_no_file ".stylelintrc"
+  end
+
   private
 
   def remake_dirs(*dirs)

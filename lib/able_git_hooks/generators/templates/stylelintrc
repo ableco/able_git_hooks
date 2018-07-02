@@ -1,0 +1,15 @@
+{
+  "processors": ["stylelint-processor-styled-components"],
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-styled-components"
+  ],
+  "syntax": "scss",
+  "plugins": ["stylelint-order"],
+  "rules": {
+    "order/properties-alphabetical-order": true,
+    "block-opening-brace-space-after": null,
+    "block-closing-brace-space-before": null,
+    "color-hex-case": "lower"
+  }
+}
