@@ -4,6 +4,9 @@ require "rubocop"
 require "shellwords"
 
 staged_files = `git diff -z --staged --name-only --diff-filter=ACM`.split("\u0000")
+
+exit 0 if staged_files.empty?
+
 config_store = RuboCop::ConfigStore.new
 target_files = RuboCop::TargetFinder.new(config_store).find(staged_files)
 
