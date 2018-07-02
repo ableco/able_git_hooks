@@ -1,10 +1,16 @@
 #!/usr/bin/env ruby
 
 require "rubocop"
+require "shellwords"
 
-staged_files = `git diff --cached --name-only --diff-filter=ACM`.split
-base_command = "bundle exec rubocop -RP -c config/rubocop.yml --force-exclusion"
+staged_files = `git diff -z --staged --name-only --diff-filter=ACM`.split("\u0000")
+config_store = RuboCop::ConfigStore.new
+target_files = RuboCop::TargetFinder.new(config_store).find(staged_files)
 
-staged_files.each do |file|
-  `#{base_command} --stdin "#{file}" < <(git show :"$#{file}")`
+target_files.each do |target_path|
+  relative = target_path.sub("#{Dir.pwd}/", "")
+  command  = %Q(rubocop -R -c config/rubocop.yml --force-exclusion --stdin "#{relative}" < <(git show :"#{relative}"))
+  command  = Shellwords.escape(command)
+
+  exit 1 unless system("bash -c #{command}")
 end
