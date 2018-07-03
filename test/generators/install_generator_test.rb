@@ -18,9 +18,7 @@ class InstallGeneratorTest < Rails::Generators::TestCase
   end
 
   def test_rubocop_hooks_were_copied
-    assert_file "hooks/pre-commit/rubocop" do |f|
-      assert_match(/bundle exec rubocop/, f)
-    end
+    assert_file "hooks/pre-commit/rubocop.rb"
   end
 
   def test_git_hook_was_copied
