@@ -7,14 +7,16 @@ class InstallGeneratorTest < Rails::Generators::TestCase
 
   DESTINATION = File.expand_path File.join(File.dirname(__FILE__), "..", "..", "tmp")
 
-  FileUtils.mkdir_p(DESTINATION) unless Dir.exist?(DESTINATION)
-
   destination DESTINATION
   tests       AbleGitHooks::Generators::InstallGenerator
 
   def setup
     remake_dirs ".git", "hooks", "config"
     run_generator
+  end
+
+  def teardown
+    rm_r DESTINATION
   end
 
   def test_rubocop_hooks_were_copied
@@ -52,6 +54,7 @@ class InstallGeneratorTest < Rails::Generators::TestCase
   private
 
   def remake_dirs(*dirs)
+    FileUtils.mkdir_p(DESTINATION) unless Dir.exist?(DESTINATION)
     dirs.each do |dir|
       path = "#{DESTINATION}/#{dir}"
 
