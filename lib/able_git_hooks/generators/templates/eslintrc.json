@@ -1,0 +1,33 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  plugins: ["import", "react", "prettier"],
+  "rules": {
+    "no-dupe-keys": "error",
+    "no-undef": "error",
+    "no-unreachable": "error",
+    "no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
+    "no-useless-constructor": "error",
+    "no-var": "error",
+    "no-duplicate-imports": "error",
+    "no-duplicate-case": "error",
+    "no-console": "error",
+    "no-debugger": "error",
+    "import/no-unresolved": "error",
+    "import/default": "error",
+    "react/jsx-no-undef": "error",
+    "react/jsx-uses-vars": 1,
+    "react/jsx-uses-react": "error",
+    "react/react-in-jsx-scope": "error",
+    "react/no-string-refs": "error",
+    "react/prop-types": ["error", { skipUndeclared: true }],
+    "react/forbid-prop-types": "error",
+    "react/prefer-stateless-function": "error",
+    "prettier/prettier": "error"
+  }
+}

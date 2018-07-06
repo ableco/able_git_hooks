@@ -7,8 +7,6 @@ class InstallGeneratorTest < Rails::Generators::TestCase
 
   DESTINATION = File.expand_path File.join(File.dirname(__FILE__), "..", "..", "tmp")
 
-  FileUtils.mkdir_p(DESTINATION) unless Dir.exist?(DESTINATION)
-
   destination DESTINATION
   tests       AbleGitHooks::Generators::InstallGenerator
 
@@ -17,10 +15,12 @@ class InstallGeneratorTest < Rails::Generators::TestCase
     run_generator
   end
 
+  def teardown
+    rm_r DESTINATION
+  end
+
   def test_rubocop_hooks_were_copied
-    assert_file "hooks/pre-commit/rubocop" do |f|
-      assert_match(/bundle exec rubocop/, f)
-    end
+    assert_file "hooks/pre-commit/rubocop.rb"
   end
 
   def test_git_hook_was_copied
@@ -35,9 +35,26 @@ class InstallGeneratorTest < Rails::Generators::TestCase
     end
   end
 
+  def test_eslint_hook_were_copied
+    assert_file "hooks/pre-commit/eslint-check.js"
+  end
+
+  def test_eslint_config_was_copied
+    assert_file ".eslintrc.json"
+  end
+
+  def test_stylelint_hook_not_copied
+    assert_no_file "hooks/pre-commit/stylelint-check.js"
+  end
+
+  def test_stylelint_config_not_copied
+    assert_no_file ".stylelintrc"
+  end
+
   private
 
   def remake_dirs(*dirs)
+    FileUtils.mkdir_p(DESTINATION) unless Dir.exist?(DESTINATION)
     dirs.each do |dir|
       path = "#{DESTINATION}/#{dir}"
 

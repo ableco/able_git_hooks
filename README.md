@@ -24,3 +24,10 @@ And then execute:
 Execute the generator command to copy the files:
 
     $ bundle exec rails generate able_git_hooks:install
+
+
+For the ESLint default configuration you'll need to install
+
+- eslint-plugin-import
+- eslint-plugin-react
+- eslint-plugin-prettier
